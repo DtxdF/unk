@@ -20,7 +20,7 @@ class JsonHandler(tornado.web.RequestHandler):
 				json_data = tornado.escape.json_decode(body)
 			except json.decoder.JSONDecodeError:
 				self.write_template({
-					"message" : "El formato debe ser JSON"
+					"message" : "The message must be in JSON format"
 				}, status_code=400)
 				self.finish()
 
@@ -40,7 +40,7 @@ class JsonHandler(tornado.web.RequestHandler):
 				raise tornado.web.HTTPError(400, reason="The value's type isn't expected")
 
 		if (valid_func is not None) and not (valid_func(value)):
-			raise tornado.web.HTTPError(400, reason="One value isn't correct")
+			raise tornado.web.HTTPError(400, reason="A value isn't correct")
 
 		return value
 
