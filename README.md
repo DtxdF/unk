@@ -192,5 +192,6 @@ curl http://localhost:8080/v1.0/calc -X POST -d '{"x" : 2, "y" : 2, "operation" 
 
 - [ ] Documentarlo mejor
 - [x] Personalizar los encabezados globales
+- [ ] Separar cada archivo de configuración por cada recurso
 
 \~ DtxdF
