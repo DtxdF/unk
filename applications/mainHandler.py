@@ -3,6 +3,7 @@ import logging
 import traceback
 import tornado.escape
 import tornado.web
+import constants
 from tornado.options import options
 
 class RequireArg(Exception):
@@ -128,12 +129,12 @@ class JsonHandler(tornado.web.RequestHandler):
 		self.write(tornado.escape.json_encode(chunk))
 
 	def set_default_headers(self):
-		self.set_header("Access-Control-Allow-Origin", "*")
-		self.set_header("Access-Control-Allow-Headers", "*")
 		self.set_header("Content-Type", "application/json")
+		for key, value in constants.DEFAULT_HTTP_HEADERS.items():
+			self.set_header(key, value)
 
 	async def options(self, *args, **kwargs):
-		self.set_header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
+		self.set_header("Access-Control-Allow-Methods", constants.DEFAULT_METHODS)
 
 class NotFoundHandler(JsonHandler):
 	def initialize(self, status_code, message):
